@@ -80,7 +80,9 @@ function draw() {
     ctx.fillText(char, charX, charY);
   }
   textX -= textSpeed;
-  if (textX + text.length * 30 < 0) textX = w;
+  const textWidth = ctx.measureText(text).width;
+  if (textX + textWidth < -20) textX = w + 20;
+
 
   requestAnimationFrame(draw);
 }
