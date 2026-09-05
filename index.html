@@ -82,13 +82,11 @@ function draw() {
   textX -= textSpeed;
   const textWidth = ctx.measureText(text).width;
   if (textX + textWidth < -20) textX = w + 20;
-
-
   requestAnimationFrame(draw);
 }
 draw();
 canvas.addEventListener('click', () => {
-  window.open('https://github.com/stefan-anderson', '_blank');
+  window.location.href = 'https://github.com/stefan-anderson';
 });
 </script>
 </body>
