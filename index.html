@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Stefan Anderson</title>
+<meta name="description" content="Stefan Anderson GitHub Page">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h1 style="position:absolute; left:-9999px;">
+  Stefan Anderson
+</h1>
+
+<canvas id="space"></canvas>
+<script>
+const canvas = document.getElementById('space');
+const ctx = canvas.getContext('2d');
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Tre lager stjärnor
+const layers = [
+  { count: 100, color: '#f2d675', speed: 0.1, size: 1 },
+  { count: 80, color: '#d8c27a', speed: 0.5, size: 1.5 },
+  { count: 60, color: '#fff2b0', speed: 2.5, size: 2 }
+];
+for (const layer of layers) {
+  layer.stars = Array.from({length: layer.count}, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h
+  }));
+}
+
+// Sinus-scroll för namn
+const text = "Stefan Anderson";
+let textX = w;
+const amplitude = 150;
+const frequency = 0.01;
+const textSpeed = 4;
+
+function draw() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, w, h);
+
+  // Rita stjärnor
+  for (const layer of layers) {
+    ctx.fillStyle = layer.color;
+    for (const s of layer.stars) {
+      s.x -= layer.speed;
+      if (s.x < 0) s.x = w;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, layer.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Rita namn ovanpå
+  ctx.font = "70px Audiowide";
+  ctx.fillStyle = "#f2d675";
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const charX = textX + i * 40;
+    const charY = h / 2 + Math.sin(charX * frequency) * amplitude;
+    ctx.fillText(char, charX, charY);
+  }
+  textX -= textSpeed;
+  if (textX + text.length * 30 < 0) textX = w;
+
+  requestAnimationFrame(draw);
+}
+draw();
+canvas.addEventListener('click', () => {
+  window.open('https://github.com/stefan-anderson', '_blank');
+});
+</script>
+</body>
+</html>
 
