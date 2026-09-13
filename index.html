@@ -101,11 +101,11 @@ canvas.addEventListener('contextmenu', e => { e.preventDefault(); toggle(); });
 // --- Mobil ---
 canvas.addEventListener('touchstart', () => {
   pressTimer = setTimeout(() => {
-    longPress = true;
     window.location.href = 'https://github.com/stefan-anderson';
   }, 500);
 });
 canvas.addEventListener('touchend', () => {
+  e.preventDefault();
   clearTimeout(pressTimer);
   toggle();
 });
