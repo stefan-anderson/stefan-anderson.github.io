@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-<audio id="bgAudio" src="sound.wav" loop muted></audio> 
+<audio id="bgAudio" src="sound.wav" loop></audio> 
 <h1 style="position:absolute; left:-9999px;">
   Stefan Anderson
 </h1>
@@ -90,7 +90,6 @@ canvas.addEventListener('click', () => {
   window.location.href = 'https://github.com/stefan-anderson';
 });
 const audio = document.getElementById('bgAudio');
-audio.muted = false;
 audio.play();
 let playing = true;
 document.addEventListener('contextmenu', e => {
