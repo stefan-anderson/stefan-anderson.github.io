@@ -91,7 +91,8 @@ canvas.addEventListener('click', () => {
 });
 const audio = document.getElementById('bgAudio');
 audio.muted = false;
-let playing = false;
+audio.play();
+let playing = true;
 document.addEventListener('contextmenu', e => {
     e.preventDefault();
     if (playing) {
